@@ -61,6 +61,13 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         notifyDataSetChanged();
     }
 
+    public List<ConvertedText> getmConvertedTexts() {
+        return mConvertedTexts;
+    }
+
+    public void setmConvertedTexts(List<ConvertedText> mConvertedTexts) {
+        this.mConvertedTexts = mConvertedTexts;
+    }
 
     class ConvertedTextViewHolder extends RecyclerView.ViewHolder {
 

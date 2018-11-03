@@ -5,6 +5,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.List;
+
+import io.keinix.justthetext.data.ConvertedText;
+
 public final class ClipboardUtil {
 
     public static void copyText(Context context, String text) {
@@ -14,5 +18,14 @@ public final class ClipboardUtil {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(context, "copied", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void copyAllConvertedTexts(Context context, List<ConvertedText> convertedTexts) {
+        StringBuilder builder = new StringBuilder();
+        for (ConvertedText convertedText : convertedTexts) {
+            String text = convertedText.getmConvertedText() + " ";
+            builder.append(text);
+        }
+        copyText(context, builder.toString());
     }
 }

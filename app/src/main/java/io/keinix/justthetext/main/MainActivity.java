@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
@@ -21,6 +22,8 @@ import io.keinix.justthetext.R;
 import io.keinix.justthetext.data.ConvertedText;
 import io.keinix.justthetext.main.domain.usecases.ConvertImageToText;
 import io.keinix.justthetext.main.domain.usecases.TakePhoto;
+import io.keinix.justthetext.utils.ClipboardUtil;
+import io.keinix.justthetext.utils.ShareUtil;
 
 public class MainActivity extends AppCompatActivity implements ConvertImageToText.ImageConvertedListener {
 
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     public void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text) {
-        ConvertedText convertedText = new ConvertedText(bitmap, text.getText());
+        ConvertedText convertedText = new ConvertedText(bitmap, "Test Text");
         mAdapter.updateAdapter(convertedText);
     }
 
@@ -62,9 +65,21 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share_all:
+                ShareUtil.shareAllConvertedTexts(this, mAdapter.getmConvertedTexts());
+                break;
+            case R.id.action_copy_all:
+                ClipboardUtil.copyAllConvertedTexts(this, mAdapter.getmConvertedTexts());
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

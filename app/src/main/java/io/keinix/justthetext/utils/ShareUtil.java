@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.List;
+
+import io.keinix.justthetext.data.ConvertedText;
+
 public final class ShareUtil {
 
     public static void shareText(Context context, String text){
@@ -16,5 +20,14 @@ public final class ShareUtil {
         } else {
             Toast.makeText(context, "No installed apps can haldle text :(", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void shareAllConvertedTexts(Context context, List<ConvertedText> convertedTexts) {
+        StringBuilder builder = new StringBuilder();
+        for (ConvertedText  convertedText: convertedTexts) {
+            String text = convertedText.getmConvertedText() + " ";
+            builder.append(text);
+        }
+        shareText(context, builder.toString());
     }
 }

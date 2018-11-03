@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
     class ConvertedTextViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.image_view_original_image) ImageView thumbNailImageView;
+        @BindView(R.id.text_view_converted_text) TextView convertedTextTextView;
 
         ConvertedTextViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,7 +64,10 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         }
 
         void bindView(int position) {
-            thumbNailImageView.setImageBitmap(mConvertedTexts.get(position).getmOrigionalThumbNail());
+            ConvertedText convertedText = mConvertedTexts.get(position);
+            thumbNailImageView.setImageBitmap(convertedText.getmOrigionalThumbNail());
+//            convertedTextTextView.setText(convertedText.getmConvertedText());
+
         }
     }
 }

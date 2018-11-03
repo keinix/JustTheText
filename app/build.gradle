@@ -21,6 +21,10 @@ android {
         exclude 'META-INF/proguard/androidx-annotations.pro'
 
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 

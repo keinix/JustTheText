@@ -12,14 +12,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.keinix.justthetext.R;
 import io.keinix.justthetext.data.ConvertedText;
+import io.keinix.justthetext.main.domain.usecases.ConvertImageToText;
 import io.keinix.justthetext.main.domain.usecases.TakePhoto;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConvertImageToText.ImageConvertedListener {
 
     @BindView(R.id.recycler_view_main) RecyclerView mainRecyclerView;
 
@@ -31,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel mViewModel;
     private ConvertedTextAdapter mAdapter;
     private TakePhoto mTaskPhoto;
+
+
+    @Override
+    public void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text) {
+        ConvertedText convertedText = new ConvertedText(bitmap, text.getText());
+        mAdapter.updateAdapter(convertedText);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == TakePhoto.REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            ConvertedText convertedText = new ConvertedText();
-            convertedText.setmOrigionalThumbNail(bitmap);
-            mAdapter.updateAdapter(convertedText);
+            ConvertImageToText.getConvertedText(this, bitmap);
         }
     }
 }

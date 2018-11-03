@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
     }
 
     private void setUpRecyclerView() {
-        mAdapter = new ConvertedTextAdapter();
+        mAdapter = new ConvertedTextAdapter(this);
         mainRecyclerView.setAdapter(mAdapter);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

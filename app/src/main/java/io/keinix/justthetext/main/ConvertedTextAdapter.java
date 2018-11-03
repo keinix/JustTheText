@@ -1,5 +1,6 @@
 package io.keinix.justthetext.main;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,12 +14,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.keinix.justthetext.R;
 import io.keinix.justthetext.data.ConvertedText;
+import io.keinix.justthetext.utils.ClipboardUtil;
+import io.keinix.justthetext.utils.ShareUtil;
 
 public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdapter.ConvertedTextViewHolder> {
 
     private List<ConvertedText> mConvertedTexts;
+    private Context mContext;
+
+    public ConvertedTextAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     @NonNull
     @Override
@@ -58,13 +67,25 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         @BindView(R.id.image_view_original_image) ImageView thumbNailImageView;
         @BindView(R.id.text_view_converted_text) TextView convertedTextTextView;
 
+        private ConvertedText convertedText;
+
+        @OnClick(R.id.image_button_share)
+        void shareText() {
+            ShareUtil.shareText(mContext, convertedText.getmConvertedText());
+        }
+
+        @OnClick(R.id.image_button_copy)
+        void copyText() {
+            ClipboardUtil.copyText(mContext, convertedText.getmConvertedText());
+        }
+
         ConvertedTextViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         void bindView(int position) {
-            ConvertedText convertedText = mConvertedTexts.get(position);
+            convertedText = mConvertedTexts.get(position);
             thumbNailImageView.setImageBitmap(convertedText.getmOrigionalThumbNail());
 //            convertedTextTextView.setText(convertedText.getmConvertedText());
 

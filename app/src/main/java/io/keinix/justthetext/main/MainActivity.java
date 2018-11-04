@@ -3,6 +3,7 @@ package io.keinix.justthetext.main;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     public void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text) {
-        ConvertedText convertedText = new ConvertedText(bitmap, "Test Text");
+        ConvertedText convertedText = new ConvertedText(bitmap, text.getText());
         mAdapter.updateAdapter(convertedText);
     }
 
@@ -85,7 +86,8 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == TakePhoto.REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap = BitmapFactory.decodeFile(mTaskPhoto.getPhotoFile().getAbsolutePath());
             ConvertImageToText.getConvertedText(this, bitmap);
         }
     }

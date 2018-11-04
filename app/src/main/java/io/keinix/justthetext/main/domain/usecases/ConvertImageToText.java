@@ -10,9 +10,10 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 public class ConvertImageToText {
 
-    public static final String TAG = ConvertImageToText.class.getSimpleName();
+    private static final String TAG = ConvertImageToText.class.getSimpleName();
 
     public interface ImageConvertedListener {
+        // A ConvertedText Object should be created with the results from this callback
         void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text);
     }
 
@@ -21,9 +22,11 @@ public class ConvertImageToText {
         FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
         textRecognizer.processImage(image)
-                .addOnSuccessListener(text -> listener.onImageConvertedToText(bitmap, text))
+                .addOnSuccessListener(text -> {
+                    listener.onImageConvertedToText(bitmap, text);
+                    Log.d(TAG, "ON SUCESS CALLED");
+                })
                 .addOnFailureListener(exception -> Log.d(TAG, "ImageProcessing failed"));
-
     }
 
 

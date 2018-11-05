@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == TakePhoto.REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
-//            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             Bitmap bitmap = BitmapFactory.decodeFile(mTaskPhoto.getPhotoFile().getAbsolutePath());
             ConvertImageToText.getConvertedText(this, bitmap);
         }

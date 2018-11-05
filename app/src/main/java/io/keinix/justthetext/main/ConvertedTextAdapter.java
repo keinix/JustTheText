@@ -94,7 +94,7 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         void bindView(int position) {
             convertedText = mConvertedTexts.get(position);
             thumbNailImageView.setImageBitmap(convertedText.getmOrigionalThumbNail());
-//            convertedTextTextView.setText(convertedText.getmConvertedText());
+            convertedTextTextView.setText(convertedText.getmConvertedText());
 
         }
     }

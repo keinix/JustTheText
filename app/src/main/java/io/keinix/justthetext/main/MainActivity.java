@@ -16,6 +16,8 @@ import android.widget.ImageView;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     public void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text) {
-        ConvertedText convertedText = new ConvertedText(bitmap, text.getText());
+        ConvertedText convertedText = mViewModel.createConvertedText(bitmap, text.getText());
         mAdapter.updateAdapter(convertedText);
     }
 
@@ -68,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        List<ConvertedText> convertedTexts = mViewModel.getConvertedTexts();
+        if (convertedTexts != null) mAdapter.updateAdapter(convertedTexts);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

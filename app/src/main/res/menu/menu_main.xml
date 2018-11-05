@@ -4,6 +4,14 @@
     tools:context="io.keinix.justthetext.main.MainActivity">
 
     <item
+        android:id="@+id/action_share_all"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:iconTint="@android:color/white"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_copy_all"
         android:orderInCategory="100"
         android:icon="@drawable/ic_content_copy_black_24dp"
@@ -11,12 +19,5 @@
         android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/action_share_all"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_share_black_24dp"
-        android:iconTint="@android:color/white"
-        android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />
 
 </menu>

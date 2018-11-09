@@ -2,10 +2,13 @@ package io.keinix.justthetext.data;
 
 import android.graphics.Bitmap;
 
+import java.io.File;
+
 public class ConvertedText {
 
     private Bitmap mOrigionalThumbNail;
     private String mConvertedText;
+    private File mImageFile;
 
     public Bitmap getmOrigionalThumbNail() {
         return mOrigionalThumbNail;
@@ -30,5 +33,13 @@ public class ConvertedText {
 
     public void setmConvertedText(String mConvertedText) {
         this.mConvertedText = mConvertedText;
+    }
+
+    public File getImageFile() {
+        return mImageFile;
+    }
+
+    public void setImageFile(File imageFile) {
+        mImageFile = imageFile;
     }
 }

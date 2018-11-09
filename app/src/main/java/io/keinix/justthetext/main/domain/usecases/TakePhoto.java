@@ -17,11 +17,12 @@ import io.keinix.justthetext.main.MainActivity;
 public class TakePhoto {
 
     public static final int REQUEST_CODE_PHOTO = 100;
+    public static final String KEY_PHOTO_FILE_PATH = "KEY_PHOTO_FILE_PATH";
     private static final String FILE_URI = "io.keinix.fileprovider";
 
 
     private Context context;
-    private File photoFile;
+    private String photoFilePath;
 
     public TakePhoto(Context context) {
         this.context = context;
@@ -48,15 +49,22 @@ public class TakePhoto {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        photoFile = File.createTempFile(
+
+        File photoFile = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
+        photoFilePath = photoFile.getAbsolutePath();
+        ((MainActivity) context).savePhotoPath(photoFilePath);
         return photoFile;
     }
 
-    public File getPhotoFile() {
-        return photoFile;
+    public String getPhotoFilePath() {
+        return photoFilePath;
+    }
+
+    public void setPhotoFilePath(String photoFilePath) {
+        this.photoFilePath = photoFilePath;
     }
 }

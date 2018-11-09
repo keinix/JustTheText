@@ -18,7 +18,7 @@ public final class ShareUtil {
         if (sendIntent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(sendIntent);
         } else {
-            Toast.makeText(context, "No installed apps can haldle text :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No installed apps can handle text :(", Toast.LENGTH_SHORT).show();
         }
     }
 

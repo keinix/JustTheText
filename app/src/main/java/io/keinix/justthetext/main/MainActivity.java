@@ -3,16 +3,16 @@ package io.keinix.justthetext.main;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 
@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @BindView(R.id.recycler_view_main) RecyclerView mainRecyclerView;
 
-    @OnClick(R.id.fab)
-    void launchCamera() {
-        mTaskPhoto.takePhoto();
-    }
-
+    public static final String TAG = MainActivity.class.getSimpleName();
     private MainViewModel mViewModel;
     private ConvertedTextAdapter mAdapter;
-    private TakePhoto mTaskPhoto;
+    private TakePhoto mTakePhoto;
 
+    @OnClick(R.id.fab)
+    void launchCamera() {
+        mTakePhoto.takePhoto();
+    }
 
     @Override
     public void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
         ButterKnife.bind(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mTaskPhoto = new TakePhoto(this);
+        if (savedInstanceState == null) mTakePhoto = new TakePhoto(this);
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         setUpRecyclerView();
     }
@@ -74,8 +74,11 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(TAG, "ON RESTORE INSTANCE STATE");
         List<ConvertedText> convertedTexts = mViewModel.getConvertedTexts();
         if (convertedTexts != null) mAdapter.updateAdapter(convertedTexts);
+            mTakePhoto = new TakePhoto(this);
+            mTakePhoto.setPhotoFilePath(mViewModel.getLastPhotoPath());
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -94,9 +97,13 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.d(TAG, "ON ACTIVITY RESULT");
         if (requestCode == TakePhoto.REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
-            Bitmap bitmap = BitmapFactory.decodeFile(mTaskPhoto.getPhotoFile().getAbsolutePath());
-            ConvertImageToText.getConvertedText(this, bitmap);
+            mViewModel.processPhotoFile(this, mTakePhoto.getPhotoFilePath());
         }
+    }
+
+    public void savePhotoPath(String photoPath) {
+        mViewModel.setLastPhotoPath(photoPath);
     }
 }

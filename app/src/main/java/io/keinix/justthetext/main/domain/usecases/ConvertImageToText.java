@@ -22,10 +22,7 @@ public class ConvertImageToText {
         FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
         textRecognizer.processImage(image)
-                .addOnSuccessListener(text -> {
-                    listener.onImageConvertedToText(bitmap, text);
-                    Log.d(TAG, "ON SUCESS CALLED");
-                })
+                .addOnSuccessListener(text -> listener.onImageConvertedToText(bitmap, text))
                 .addOnFailureListener(exception -> Log.d(TAG, "ImageProcessing failed"));
     }
 

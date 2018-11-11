@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.keinix.justthetext.R;
 import io.keinix.justthetext.data.ConvertedText;
+import io.keinix.justthetext.main.domain.usecases.EditConvertedText;
 import io.keinix.justthetext.utils.ClipboardUtil;
 import io.keinix.justthetext.utils.ShareUtil;
 
@@ -101,6 +102,7 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         @BindView(R.id.text_view_converted_text) TextView convertedTextTextView;
 
         private ConvertedText convertedText;
+        private EditConvertedText mEditConvertedText;
 
         @OnClick(R.id.image_button_share)
         void shareText() {
@@ -115,6 +117,13 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         @OnClick(R.id.image_button_clear_item)
         void clearItem() {
             deleteItem(convertedText);
+        }
+
+        @OnClick(R.id.image_button_edit)
+        void edit() {
+            if (mEditConvertedText == null) mEditConvertedText =
+                    new EditConvertedText(mContext, convertedTextTextView, convertedText);
+            mEditConvertedText.showEditDialog();
         }
 
         ConvertedTextViewHolder(@NonNull View itemView) {

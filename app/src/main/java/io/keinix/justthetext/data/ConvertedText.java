@@ -23,6 +23,10 @@ public class ConvertedText {
         return mConvertedText;
     }
 
+    public void setConvertedText(String convertedText) {
+        mConvertedText = convertedText;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

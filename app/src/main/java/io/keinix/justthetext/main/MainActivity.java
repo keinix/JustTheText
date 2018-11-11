@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d(TAG, "ON RESTORE INSTANCE STATE");
         List<ConvertedText> convertedTexts = mViewModel.getConvertedTexts();
         if (convertedTexts != null) mAdapter.updateAdapter(convertedTexts);
             mTakePhoto = new TakePhoto(this);
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Log.d(TAG, "ON ACTIVITY RESULT");
         if (requestCode == TakePhoto.REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
             mViewModel.processPhotoFile(this, mTakePhoto.getPhotoFilePath());
         }

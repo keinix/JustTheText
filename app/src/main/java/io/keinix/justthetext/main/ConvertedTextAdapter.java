@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +36,14 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
     @NonNull
     @Override
     public ConvertedTextViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_captured_text, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_captured_text, viewGroup, false);
         return new ConvertedTextViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConvertedTextViewHolder convertedTextViewHolder, int postion) {
-        convertedTextViewHolder.bindView(postion);
+    public void onBindViewHolder(@NonNull ConvertedTextViewHolder convertedTextViewHolder, int position) {
+        convertedTextViewHolder.bindView(position);
     }
 
     @Override
@@ -121,9 +124,10 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
 
         void bindView(int position) {
             convertedText = mConvertedTexts.get(position);
-            thumbNailImageView.setImageBitmap(convertedText.getmOrigionalThumbNail());
+            Glide.with(mContext)
+                    .load(convertedText.getmOrigionalThumbNail())
+                    .into(thumbNailImageView);
             convertedTextTextView.setText(convertedText.getmConvertedText());
-
         }
     }
 }

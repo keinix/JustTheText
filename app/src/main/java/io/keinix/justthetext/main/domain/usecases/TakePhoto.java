@@ -17,7 +17,6 @@ import io.keinix.justthetext.main.MainActivity;
 public class TakePhoto {
 
     public static final int REQUEST_CODE_PHOTO = 100;
-    public static final String KEY_PHOTO_FILE_PATH = "KEY_PHOTO_FILE_PATH";
     private static final String FILE_URI = "io.keinix.fileprovider";
 
 

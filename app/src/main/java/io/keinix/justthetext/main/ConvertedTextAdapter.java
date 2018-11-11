@@ -74,6 +74,18 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         snackbar.show();
     }
 
+    private void deleteItem(ConvertedText convertedText) {
+        for (int i = 0; i < mConvertedTexts.size(); i++) {
+            ConvertedText item = mConvertedTexts.get(i);
+            if (convertedText.equals(item)) {
+                mConvertedTexts.remove(i);
+                notifyItemRemoved(i);
+                showUndoSnackbar(convertedText, i);
+                break;
+            }
+        }
+    }
+
     private void undoDelete(ConvertedText lastDeletedConvertedText, int position) {
         mConvertedTexts.add(position, lastDeletedConvertedText);
         notifyItemInserted(position);
@@ -86,7 +98,6 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         @BindView(R.id.text_view_converted_text) TextView convertedTextTextView;
 
         private ConvertedText convertedText;
-        private int mPosition;
 
         @OnClick(R.id.image_button_share)
         void shareText() {
@@ -100,9 +111,7 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
 
         @OnClick(R.id.image_button_clear_item)
         void clearItem() {
-            mConvertedTexts.remove(mPosition);
-            notifyItemRemoved(mPosition);
-            showUndoSnackbar(convertedText, mPosition);
+            deleteItem(convertedText);
         }
 
         ConvertedTextViewHolder(@NonNull View itemView) {
@@ -111,7 +120,6 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         }
 
         void bindView(int position) {
-            mPosition = position;
             convertedText = mConvertedTexts.get(position);
             thumbNailImageView.setImageBitmap(convertedText.getmOrigionalThumbNail());
             convertedTextTextView.setText(convertedText.getmConvertedText());

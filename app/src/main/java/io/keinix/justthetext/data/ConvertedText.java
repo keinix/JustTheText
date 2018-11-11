@@ -3,43 +3,38 @@ package io.keinix.justthetext.data;
 import android.graphics.Bitmap;
 
 import java.io.File;
+import java.util.Objects;
 
 public class ConvertedText {
 
     private Bitmap mOrigionalThumbNail;
     private String mConvertedText;
-    private File mImageFile;
-
-    public Bitmap getmOrigionalThumbNail() {
-        return mOrigionalThumbNail;
-    }
 
     public ConvertedText(Bitmap mOrigionalThumbNail, String mConvertedText) {
         this.mOrigionalThumbNail = mOrigionalThumbNail;
         this.mConvertedText = mConvertedText;
     }
 
-    public ConvertedText() {
-
-    }
-
-    public void setmOrigionalThumbNail(Bitmap mOrigionalThumbNail) {
-        this.mOrigionalThumbNail = mOrigionalThumbNail;
+    public Bitmap getmOrigionalThumbNail() {
+        return mOrigionalThumbNail;
     }
 
     public String getmConvertedText() {
         return mConvertedText;
     }
 
-    public void setmConvertedText(String mConvertedText) {
-        this.mConvertedText = mConvertedText;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConvertedText)) return false;
+        ConvertedText that = (ConvertedText) o;
+        return Objects.equals(mOrigionalThumbNail, that.mOrigionalThumbNail) &&
+                Objects.equals(mConvertedText, that.mConvertedText);
     }
 
-    public File getImageFile() {
-        return mImageFile;
-    }
+    @Override
+    public int hashCode() {
 
-    public void setImageFile(File imageFile) {
-        mImageFile = imageFile;
+        return Objects.hash(mOrigionalThumbNail, mConvertedText);
     }
 }

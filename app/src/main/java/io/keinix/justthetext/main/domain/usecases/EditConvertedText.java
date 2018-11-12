@@ -15,7 +15,6 @@ public class EditConvertedText {
     private TextView mCapturedTextItemTextView;
     private ConvertedText mConvertedText;
 
-
     public EditConvertedText(Context context, TextView textView, ConvertedText convertedText) {
         mContext = context;
         mCapturedTextItemTextView = textView;
@@ -34,7 +33,6 @@ public class EditConvertedText {
         dialog.show();
         mEditText.requestFocus();
     }
-
 
     private void changesSaved() {
         mCapturedTextItemTextView.setText(mEditText.getText());

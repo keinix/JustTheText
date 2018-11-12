@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -84,10 +83,10 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share_all:
-                ShareUtil.shareAllConvertedTexts(this, mAdapter.getmConvertedTexts());
+                ShareUtil.shareAllConvertedTexts(this, mAdapter.getConvertedTexts());
                 break;
             case R.id.action_copy_all:
-                ClipboardUtil.copyAllConvertedTexts(this, mAdapter.getmConvertedTexts());
+                ClipboardUtil.copyAllConvertedTexts(this, mAdapter.getConvertedTexts());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -100,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements ConvertImageToTex
         }
     }
 
+    /**
+     * If the camera is rotated while in the camera activity a config change will destroy
+     * the reference so it need to be persisted in {@link MainViewModel}
+     * @param photoPath of photo returned by the camera
+     */
     public void savePhotoPath(String photoPath) {
         mViewModel.setLastPhotoPath(photoPath);
     }

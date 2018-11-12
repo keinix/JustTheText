@@ -12,6 +12,7 @@ public class ConvertImageToText {
 
     private static final String TAG = ConvertImageToText.class.getSimpleName();
 
+    // implemented in MainActivity
     public interface ImageConvertedListener {
         // A ConvertedText Object should be created with the results from this callback
         void onImageConvertedToText(Bitmap bitmap, FirebaseVisionText text);
@@ -25,6 +26,4 @@ public class ConvertImageToText {
                 .addOnSuccessListener(text -> listener.onImageConvertedToText(bitmap, text))
                 .addOnFailureListener(exception -> Log.d(TAG, "ImageProcessing failed"));
     }
-
-
 }

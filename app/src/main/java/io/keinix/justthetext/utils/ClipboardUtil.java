@@ -23,7 +23,7 @@ public final class ClipboardUtil {
     public static void copyAllConvertedTexts(Context context, List<ConvertedText> convertedTexts) {
         StringBuilder builder = new StringBuilder();
         for (ConvertedText convertedText : convertedTexts) {
-            String text = convertedText.getmConvertedText() + " ";
+            String text = convertedText.getmConvertedText() + "\n";
             builder.append(text);
         }
         copyText(context, builder.toString());

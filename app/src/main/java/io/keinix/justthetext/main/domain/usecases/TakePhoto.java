@@ -44,6 +44,11 @@ public class TakePhoto {
         }
     }
 
+    /**
+     * @return File containing path of where the photo is to be saved in local storage
+     * file path is saved on line 62 in case there is a config change when returning
+     * for the camera activity
+     */
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";

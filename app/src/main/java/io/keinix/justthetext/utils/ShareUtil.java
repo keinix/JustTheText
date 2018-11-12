@@ -25,7 +25,7 @@ public final class ShareUtil {
     public static void shareAllConvertedTexts(Context context, List<ConvertedText> convertedTexts) {
         StringBuilder builder = new StringBuilder();
         for (ConvertedText  convertedText: convertedTexts) {
-            String text = convertedText.getmConvertedText() + " ";
+            String text = convertedText.getmConvertedText() + "\n";
             builder.append(text);
         }
         shareText(context, builder.toString());

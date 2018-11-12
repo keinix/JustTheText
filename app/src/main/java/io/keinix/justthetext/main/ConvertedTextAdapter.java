@@ -67,7 +67,7 @@ public class ConvertedTextAdapter extends RecyclerView.Adapter<ConvertedTextAdap
         notifyDataSetChanged();
     }
 
-    List<ConvertedText> getmConvertedTexts() {
+    List<ConvertedText> getConvertedTexts() {
         return mConvertedTexts;
     }
 

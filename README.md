@@ -3,9 +3,9 @@ A simple offline OCR app that uses Google's [ML Kit] to extract the text from a 
 
 #### Screen Shots:
 
-Before                     |  After                  
-:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/26476452/48248701-c0951800-e43b-11e8-866a-1c077b4422d0.png" height="350">  |  <img src="https://user-images.githubusercontent.com/26476452/48248563-3a78d180-e43b-11e8-9f69-309ec65ee655.png" height="350"> |
+Before                     |  After                    | Bulk Copy                 | Edit
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/26476452/48248701-c0951800-e43b-11e8-866a-1c077b4422d0.png" height="350">  |  <img src="https://user-images.githubusercontent.com/26476452/48248563-3a78d180-e43b-11e8-9f69-309ec65ee655.png" height="350"> | <img src="https://user-images.githubusercontent.com/26476452/48326054-d17f9c80-e67a-11e8-9863-4d378a9e32bd.png" height="350"> | <img src="https://user-images.githubusercontent.com/26476452/48326063-d7757d80-e67a-11e8-8879-25ee13fef79c.png" height="350">
 
 ## Core Features
 
